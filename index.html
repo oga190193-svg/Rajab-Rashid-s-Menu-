@@ -45,7 +45,6 @@ main{max-width:900px;margin:0 auto;padding:6px 14px}
 .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:10px}
 @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
 .item{display:flex;gap:12px;background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:var(--r);padding:10px;position:relative}
-
 .pic{flex:none;width:104px;height:104px;border-radius:14px;overflow:hidden;background:#000;display:grid;place-items:center;font-size:40px}
 .pic img{width:100%;height:100%;object-fit:cover;display:block}
 .info{flex:1;min-width:0;display:flex;flex-direction:column}
@@ -116,7 +115,6 @@ footer h4{color:var(--tx);font-size:18px;margin-bottom:6px}
 </style>
 </head>
 <body>
-
 <header class="hero">
   <div class="flame">🔥</div>
   <h1>مشويات <span>رجب راشد</span></h1>
@@ -126,19 +124,15 @@ footer h4{color:var(--tx);font-size:18px;margin-bottom:6px}
     <span class="badge">🎉 استعداد تام للحفلات والمناسبات</span>
   </div>
 </header>
-
 <div class="sticky">
   <div class="search"><span>🔍</span><input id="q" type="search" placeholder="ابحث عن صنف... (كفتة، سجق، طرب)" autocomplete="off"></div>
   <nav class="chips" id="chips"></nav>
 </div>
-
 <main id="menu"></main>
 <p class="empty" id="empty">😕 مفيش أصناف مطابقة للبحث</p>
-
 <main>
   <div class="promo"><b>مشوياتنا سر الطعم الأصيل</b><p>للحجز والاستعلام وطلبات الحفلات والمناسبات تواصل معنا</p></div>
 </main>
-
 <footer>
   <h4>مشويات رجب راشد</h4>
   <div>📍 شارع لاشين بجوار فودافون - متفرع من شارع الفيوم</div>
@@ -148,10 +142,8 @@ footer h4{color:var(--tx);font-size:18px;margin-bottom:6px}
   </div>
   <div>للحجز والاستعلام</div>
 </footer>
-
 <div class="bar" id="bar"><button id="openCart"><span>🛒 عرض السلة <span class="cnt" id="cnt">0</span></span><span id="barTot">0 جنيه</span></button></div>
 <div class="ov" id="ov"></div>
-
 <section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="سلة الطلب">
   <div class="sh"><h3>🛒 طلبك</h3><button class="x" id="close" aria-label="إغلاق">✕</button></div>
   <div class="sb">
@@ -172,15 +164,14 @@ footer h4{color:var(--tx);font-size:18px;margin-bottom:6px}
   </div>
 </section>
 <div class="toast" id="toast"></div>
-
 <script>
 /* ===== الإعدادات ===== */
-const WA=['201019','201338'].join('');   // رقم الواتساب (غير ظاهر في المنيو)
+const WA=['201019','201338'].join('');
 const SHOP='مشويات رجب راشد';
-const IMG_DIR='';  // الصور في نفس مكان index.html. لو حطيتيها في فولدر اسمه images اكتبي 'images/'
+const IMG_DIR='';
 const imgSrc=k=>IMG_DIR+k+'.jpg';
+const KEYP='rr_pending_v1';
 const KEY='rr_cart_v1', KEYF='rr_form_v1';
-
 /* ===== البيانات ===== */
 const CATS=[
  {id:'meals',t:'الوجبات',e:'🍽️',s:'الوجبات الفردية بالأرز والسلطة والعيش'},
@@ -228,7 +219,6 @@ const ITEMS=[
 ];
 const EMO={meals:'🍽️',trays:'🍖',grills:'🔥',sand:'🥖',tagine:'🥘',haw:'🥙',extra:'🥗'};
 const WTS=[{k:'ربع كيلو',f:.25},{k:'نص كيلو',f:.5},{k:'كيلو',f:1}];
-
 /* ===== الحالة ===== */
 const $=s=>document.querySelector(s);
 let cart={}, mode='توصيل';
@@ -236,7 +226,6 @@ try{cart=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){cart={}}
 const money=n=>n.toLocaleString('ar-EG')+' جنيه';
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(cart))}catch(e){}};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
 /* ===== رسم المنيو ===== */
 function pic(it){
   if(!it.img)return '';
@@ -266,7 +255,6 @@ function refreshAct(it){
   const q=(cart[it.id]||{}).q||0;
   el.innerHTML=q?`<div class="qty"><button data-dec="${it.id}" aria-label="نقص">−</button><b>${q}</b><button data-inc="${it.id}" aria-label="زيادة">+</button></div>`:`<button class="add" data-add="${it.id}">+ أضف</button>`;
 }
-
 /* ===== السلة ===== */
 function add(id,f){
   const it=ITEMS.find(x=>x.id===id); if(!it)return;
@@ -297,7 +285,6 @@ function openSheet(o){
   document.body.style.overflow=o?'hidden':'';
   if(!o)paint();else $('#bar').classList.remove('show');
 }
-
 /* ===== النموذج ===== */
 try{const f=JSON.parse(localStorage.getItem(KEYF)||'{}');['nm','ph','ad'].forEach(i=>{if(f[i])$('#'+i).value=f[i]});if(f.m)mode=f.m}catch(e){}
 function syncMode(){
@@ -305,7 +292,6 @@ function syncMode(){
   $('#adW').style.display=mode==='توصيل'?'':'none';
 }
 function saveForm(){try{localStorage.setItem(KEYF,JSON.stringify({nm:$('#nm').value,ph:$('#ph').value,ad:$('#ad').value,m:mode}))}catch(e){}}
-
 function send(){
   if(!count())return;
   const nm=$('#nm').value.trim(),ph=$('#ph').value.trim(),ad=$('#ad').value.trim(),nt=$('#nt').value.trim();
@@ -316,9 +302,9 @@ function send(){
   saveForm();
   const lines=Object.values(cart).map((l,i)=>`${i+1}) ${l.n} × ${l.q} = ${l.p*l.q} جنيه`).join('\n');
   const msg=`🔥 *طلب جديد - ${SHOP}*\n━━━━━━━━━━━━\n${lines}\n━━━━━━━━━━━━\n💰 *الإجمالي: ${total()} جنيه*${mode==='توصيل'?' (غير شامل التوصيل)':''}\n\n👤 الاسم: ${nm}${ph?`\n📞 الموبايل: ${ph}`:''}\n🛵 نوع الطلب: ${mode}${mode==='توصيل'?`\n📍 العنوان: ${ad}`:''}${nt?`\n📝 ملاحظات: ${nt}`:''}`;
+  try{localStorage.setItem(KEYP,JSON.stringify({cart,t:Date.now()}))}catch(e){}
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank','noopener');
 }
-
 /* ===== أحداث ===== */
 document.addEventListener('click',e=>{
   const t=e.target.closest('button,[data-go]'); if(!t)return;
@@ -326,6 +312,7 @@ document.addEventListener('click',e=>{
   if(d.add)add(d.add,d.w?parseFloat(d.w):0);
   else if(d.inc)chg(d.inc,1);
   else if(d.dec)chg(d.dec,-1);
+  else if(d.undo!==undefined)undo();
   else if(d.go){document.getElementById(d.go).scrollIntoView({behavior:'smooth'})}
   else if(d.m){mode=d.m;syncMode();saveForm()}
 });
@@ -335,7 +322,6 @@ $('#send').onclick=send;
 $('#clear').onclick=()=>{if(confirm('تفريغ السلة بالكامل؟')){cart={};save();ITEMS.forEach(refreshAct);paint()}};
 ['nm','ph','ad'].forEach(i=>$('#'+i).addEventListener('input',e=>{e.target.classList.remove('bad');saveForm()}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')openSheet(false)});
-
 /* بحث */
 $('#q').addEventListener('input',e=>{
   const v=e.target.value.trim().replace(/[أإآ]/g,'ا').replace(/ة/g,'ه');
@@ -347,20 +333,34 @@ $('#q').addEventListener('input',e=>{
   document.querySelectorAll('.sec').forEach(s=>s.style.display=[...s.querySelectorAll('.item')].some(i=>i.style.display!=='none')?'':'none');
   $('#empty').style.display=any?'none':'block';
 });
-
 /* تمييز القسم الحالي */
 const io=new IntersectionObserver(es=>es.forEach(en=>{
   if(en.isIntersecting){document.querySelectorAll('.chip').forEach(c=>{const on=c.dataset.go===en.target.id;c.classList.toggle('on',on);if(on){const bx=$('#chips'),cr=c.getBoundingClientRect(),br=bx.getBoundingClientRect();bx.scrollLeft+=(cr.left+cr.width/2)-(br.left+br.width/2)}})}
 }),{rootMargin:'-140px 0px -65% 0px'});
-
-let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),1800)}
-
+let tt;function toast(m,ms=1800,html){const t=$('#toast');if(html)t.innerHTML=m;else t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),ms)}
 renderMenu();
-// تنظيف أي أصناف قديمة في السلة غير موجودة بالمنيو
 Object.keys(cart).forEach(k=>{if(!ITEMS.some(i=>i.id===(cart[k].id||k)))delete cart[k]});
 ITEMS.filter(i=>!i.kg).forEach(refreshAct);
 document.querySelectorAll('.sec').forEach(s=>io.observe(s));
 syncMode();paint();
+/* ===== تفريغ السلة تلقائياً بعد إرسال الطلب ===== */
+let backup=null;
+function finalize(){
+  let p=null;try{p=JSON.parse(localStorage.getItem(KEYP)||'null')}catch(e){}
+  if(!p||Date.now()-p.t<1500)return;
+  try{localStorage.removeItem(KEYP)}catch(e){}
+  backup=p.cart;cart={};save();$('#nt').value='';
+  ITEMS.forEach(refreshAct);openSheet(false);paint();
+  toast('✅ تم إرسال طلبك، شكراً لك! <button data-undo style="color:var(--or2);font-weight:900;margin-right:10px;text-decoration:underline">تراجع</button>',9000,true);
+}
+function undo(){
+  if(!backup)return;
+  cart=backup;backup=null;save();ITEMS.forEach(refreshAct);paint();toast('↩️ تم استرجاع طلبك');
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)finalize()});
+window.addEventListener('pageshow',finalize);
+window.addEventListener('focus',finalize);
+finalize();
 </script>
 </body>
 </html>
