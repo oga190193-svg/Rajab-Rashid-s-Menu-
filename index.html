@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#120c0a">
 <meta property="og:title" content="مشويات رجب راشد">
 <meta property="og:description" content="طعم يثبت في القلب - جميع اللحوم بلدي 100%">
-<meta property="og:image" content="images/hero.jpg">
+<meta property="og:image" content="hero.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@ body{font-family:'Cairo',system-ui,sans-serif;background:var(--bg);color:var(--t
 button,input,textarea{font-family:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none}
 .hero{position:relative;text-align:center;padding:44px 18px 34px;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:url(images/hero.jpg) center/cover;opacity:.22;filter:blur(2px)}
+.hero::before{content:"";position:absolute;inset:0;background:url(hero.jpg) center/cover;opacity:.22;filter:blur(2px)}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--bg))}
 .hero>*{position:relative;z-index:1}
 .flame{font-size:46px;filter:drop-shadow(0 0 14px #ff6a00aa)}
@@ -176,6 +176,9 @@ footer h4{color:var(--tx);font-size:18px;margin-bottom:6px}
 /* ===== الإعدادات ===== */
 const WA=['201019','201338'].join('');   // رقم الواتساب (غير ظاهر في المنيو)
 const SHOP='مشويات رجب راشد';
+const IMG_DIR='';  // الصور في نفس مكان index.html. لو حطيتيها في فولدر اسمه images اكتبي 'images/'
+const IMG_NAMES={cheese:'صورة الجبن',chicken:'صورة دجاجة',pickles:'صورة مخلل'}; // الصور اللي أسماؤها عربي في GitHub
+const imgSrc=k=>encodeURI(IMG_DIR+(IMG_NAMES[k]||k)+'.jpg');
 const KEY='rr_cart_v1', KEYF='rr_form_v1';
 
 /* ===== البيانات ===== */
@@ -239,7 +242,7 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 
 /* ===== رسم المنيو ===== */
 function pic(it){
-  return `<div class="pic"><img src="images/${it.img}.jpg" alt="${esc(it.n)}" loading="lazy" onerror="this.replaceWith(document.createTextNode('${EMO[it.c]}'))"></div>`;
+  return `<div class="pic"><img src="${imgSrc(it.img)}" alt="${esc(it.n)}" loading="lazy" onerror="this.replaceWith(document.createTextNode('${EMO[it.c]}'))"></div>`;
 }
 function card(it){
   let act;
