@@ -16,12 +16,12 @@
 <style>
 :root{--bg:#120c0a;--card:#1d1411;--card2:#261a16;--line:#3a2a24;--red:#b3201f;--red2:#8e1514;--or:#ff8a2a;--or2:#ffb347;--tx:#f6ede6;--mut:#b8a79b;--ok:#25d366;--r:18px}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth;scroll-padding-top:128px}
-body{font-family:'Cairo',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;padding-bottom:96px;background-image:radial-gradient(900px 400px at 50% -100px,#3b130e55,transparent)}
+html{scroll-padding-top:128px}
+body{font-family:'Cairo',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;padding-bottom:96px;}
 button,input,textarea{font-family:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none}
 .hero{position:relative;text-align:center;padding:44px 18px 34px;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:url(hero.jpg) center/cover;opacity:.22;filter:blur(2px)}
+.hero::before{content:"";position:absolute;inset:0;background:url(hero.jpg) center/cover;opacity:.2}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--bg))}
 .hero>*{position:relative;z-index:1}
 .flame{font-size:46px;filter:drop-shadow(0 0 14px #ff6a00aa)}
@@ -30,10 +30,10 @@ button{cursor:pointer;border:0;background:none}
 .tag{display:inline-block;margin-top:10px;background:var(--red);padding:4px 18px;border-radius:6px;font-weight:700;font-size:15px;box-shadow:0 4px 18px #b3201f66}
 .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
 .badge{background:#ffffff10;border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:13px;color:var(--or2);font-weight:600}
-.sticky{position:sticky;top:0;z-index:30;background:#120c0aee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px 12px 8px;padding-top:calc(10px + env(safe-area-inset-top))}
+.sticky{position:sticky;top:0;z-index:30;background:#120c0af7;border-bottom:1px solid var(--line);padding:10px 12px 8px;padding-top:calc(10px + env(safe-area-inset-top))}
 .search{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0 12px;max-width:760px;margin:0 auto 8px}
 .search input{flex:1;background:none;border:0;outline:0;padding:10px 0;font-size:15px}
-.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;max-width:900px;margin:0 auto;padding-bottom:2px}
+.chips{overscroll-behavior-x:contain;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;max-width:900px;margin:0 auto;padding-bottom:2px}
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;padding:7px 16px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:14px;color:var(--mut);transition:.2s}
 .chip.on{background:linear-gradient(135deg,var(--red),var(--or));color:#fff;border-color:transparent;box-shadow:0 4px 14px #b3201f66}
@@ -44,8 +44,8 @@ main{max-width:900px;margin:0 auto;padding:6px 14px}
 .sec .sub{color:var(--mut);font-size:14px;margin:0 15px 12px}
 .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:10px}
 @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
-.item{display:flex;gap:12px;background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:var(--r);padding:10px;position:relative;transition:.2s}
-.item:hover{border-color:#5a3a2e;transform:translateY(-2px)}
+.item{display:flex;gap:12px;background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:var(--r);padding:10px;position:relative}
+
 .pic{flex:none;width:104px;height:104px;border-radius:14px;overflow:hidden;background:#000;display:grid;place-items:center;font-size:40px}
 .pic img{width:100%;height:100%;object-fit:cover;display:block}
 .info{flex:1;min-width:0;display:flex;flex-direction:column}
@@ -69,6 +69,7 @@ main{max-width:900px;margin:0 auto;padding:6px 14px}
 .trays .info h3{font-size:19px}
 .trays ul{list-style:none;margin:6px 0;display:grid;grid-template-columns:1fr 1fr;gap:2px 10px;font-size:13px;color:#e6d6ca}
 .trays ul li::before{content:"✦ ";color:var(--or)}
+.item.noimg{padding:12px 14px}.tg{font-style:normal;font-size:11px;font-weight:900;background:var(--or);color:#000;padding:1px 8px;border-radius:99px;margin-right:4px;vertical-align:middle}.ban{display:block;width:100%;max-height:190px;object-fit:cover;border-radius:var(--r);margin-top:10px;border:1px solid var(--line)}
 .empty{text-align:center;color:var(--mut);padding:40px 0;display:none}
 .promo{margin:30px 0 6px;text-align:center;padding:20px;border-radius:var(--r);background:linear-gradient(135deg,#8e1514,#3b0d0b);border:1px solid #b3201f88}
 .promo b{font-size:20px;color:var(--or2)}
@@ -177,53 +178,49 @@ footer h4{color:var(--tx);font-size:18px;margin-bottom:6px}
 const WA=['201019','201338'].join('');   // رقم الواتساب (غير ظاهر في المنيو)
 const SHOP='مشويات رجب راشد';
 const IMG_DIR='';  // الصور في نفس مكان index.html. لو حطيتيها في فولدر اسمه images اكتبي 'images/'
-const IMG_NAMES={cheese:'صورة الجبن',chicken:'صورة دجاجة',pickles:'صورة مخلل'}; // الصور اللي أسماؤها عربي في GitHub
-const imgSrc=k=>encodeURI(IMG_DIR+(IMG_NAMES[k]||k)+'.jpg');
+const imgSrc=k=>IMG_DIR+k+'.jpg';
 const KEY='rr_cart_v1', KEYF='rr_form_v1';
 
 /* ===== البيانات ===== */
 const CATS=[
- {id:'meals',t:'الوجبات',e:'🍽️',s:'كل وجبة معاها أرز + سلطة + عيش'},
+ {id:'meals',t:'الوجبات',e:'🍽️',s:'الوجبات الفردية بالأرز والسلطة والعيش'},
  {id:'trays',t:'الصواني',e:'🍖',s:'للعزومات والتجمعات'},
  {id:'grills',t:'المشويات',e:'🔥',s:'الأسعار بالكيلو، والفراخ بالفرخة - اختار الكمية اللي تناسبك'},
- {id:'sand',t:'السندوتشات',e:'🥖'},
+ {id:'sand',t:'السندوتشات',e:'🥖',b:'sandwich'},
  {id:'tagine',t:'الطواجن',e:'🥘'},
  {id:'haw',t:'الحواوشي',e:'🥙'},
  {id:'extra',t:'الإضافات',e:'🥗'}
 ];
-const M=(id,n,d,p,img,tag)=>({id,c:'meals',n,d,p,img,tag});
+const M=(id,n,d,p,tag)=>({id,c:'meals',n,d,p,tag});
+const S=(id,n,p)=>({id,c:'sand',n,p});
 const ITEMS=[
- M('m1','وجبة فرخة صدر + كفتة','1/4 فرخة (صدر) + 1/8 كفتة + أرز + سلطة + عيش',145,'chicken'),
- M('m2','وجبة فرخة ورك + كفتة','1/4 فرخة (ورك) + 1/8 كفتة + أرز + سلطة + عيش',135,'chicken'),
- M('m3','وجبة فرخة صدر','1/4 فرخة (صدر) + أرز + سلطة + عيش',90,'chicken','الأوفر'),
- M('m4','وجبة ربع ورك','1/4 ورك + أرز + سلطة + عيش',80,'chicken'),
- M('m5','وجبة فرخة صدر + طرب','1/4 فرخة (صدر) + 1/8 طرب + أرز + سلطة + عيش',170,'tarab'),
- M('m6','وجبة فرخة ورك + طرب','1/4 فرخة (ورك) + 1/8 طرب + أرز + سلطة + عيش',165,'tarab'),
- M('m7','وجبة فرخة صدر + سجق','1/4 فرخة (صدر) + 1/8 سجق + أرز + سلطة + عيش',150,'sogoq'),
- M('m8','وجبة فرخة ورك + سجق','1/4 فرخة (ورك) + 1/8 سجق + أرز + سلطة + عيش',140,'sogoq'),
- M('m9','وجبة كفتة + سجق','1/8 كفتة + 1/8 سجق + أرز + سلطة + عيش',140,'kofta'),
- {id:'t1',c:'trays',n:'صينية رجب باشا',d:'خيار الباشوات... تكفي العزومة',p:1800,img:'hero',tag:'الأكثر طلباً',l:['فرخة شيش أو تكا','1/2 كفتة','1/2 سجق','1/2 طرب','1/2 ستيك','1/2 شيش طاووق']},
- {id:'t2',c:'trays',n:'صينية العيلة',d:'عيلة كبيرة... طعم واحد يجمعكم',p:2800,img:'hero',l:['فرخة شيش أو تكا','كيلو كفتة','كيلو سجق','كيلو طرب','كيلو ستيك','1/2 شيش طاووق']},
+ M('m1','وجبة فرخة صدر + كفتة','1/4 فرخة (صدر) + 1/8 كفتة + أرز + سلطة + عيش',145),
+ M('m2','وجبة فرخة ورك + كفتة','1/4 فرخة (ورك) + 1/8 كفتة + أرز + سلطة + عيش',135),
+ M('m3','وجبة فرخة صدر','1/4 فرخة (صدر) + أرز + سلطة + عيش',90,'الأوفر'),
+ M('m4','وجبة ربع ورك','1/4 ورك + أرز + سلطة + عيش',80),
+ M('m5','وجبة فرخة صدر + طرب','1/4 فرخة (صدر) + 1/8 طرب + أرز + سلطة + عيش',170),
+ M('m6','وجبة فرخة ورك + طرب','1/4 فرخة (ورك) + 1/8 طرب + أرز + سلطة + عيش',165),
+ M('m7','وجبة فرخة صدر + سجق','1/4 فرخة (صدر) + 1/8 سجق + أرز + سلطة + عيش',150),
+ M('m8','وجبة فرخة ورك + سجق','1/4 فرخة (ورك) + 1/8 سجق + أرز + سلطة + عيش',140),
+ M('m9','وجبة كفتة + سجق','1/8 كفتة + 1/8 سجق + أرز + سلطة + عيش',140),
+ {id:'t1',c:'trays',n:'صينية رجب باشا',d:'خيار الباشوات... تكفي العزومة',p:1800,img:'trays',tag:'الأكثر طلباً',l:['فرخة شيش أو تكا','1/2 كفتة','1/2 سجق','1/2 طرب','1/2 ستيك','1/2 شيش طاووق']},
+ {id:'t2',c:'trays',n:'صينية العيلة',d:'عيلة كبيرة... طعم واحد يجمعكم',p:2800,img:'trays',l:['فرخة شيش أو تكا','كيلو كفتة','كيلو سجق','كيلو طرب','كيلو ستيك','1/2 شيش طاووق']},
  {id:'g1',c:'grills',n:'كفتة',p:440,kg:1,img:'kofta'},
  {id:'g2',c:'grills',n:'سجق',p:500,kg:1,img:'sogoq'},
- {id:'g3',c:'grills',n:'فرخة شيش',p:280,img:'chicken',u:'للفرخة'},
- {id:'g4',c:'grills',n:'فرخة تكا',p:280,img:'chicken',u:'للفرخة'},
- {id:'g5',c:'grills',n:'ممبار ضاني',p:700,kg:1,img:'tarab'},
+ {id:'g3',c:'grills',n:'فرخة شيش',p:280,img:'shish',u:'للفرخة'},
+ {id:'g4',c:'grills',n:'فرخة تكا',p:280,img:'tika',u:'للفرخة'},
+ {id:'g5',c:'grills',n:'ممبار ضاني',p:700,kg:1,img:'mombar'},
  {id:'g6',c:'grills',n:'ريش ضاني',p:1100,kg:1,img:'reesh'},
  {id:'g7',c:'grills',n:'طرب',p:600,kg:1,img:'tarab'},
- {id:'g8',c:'grills',n:'كباب ضاني',p:1000,kg:1,img:'kofta'},
+ {id:'g8',c:'grills',n:'كباب ضاني',p:1000,kg:1,img:'kebab'},
  {id:'g9',c:'grills',n:'ستيك',p:900,kg:1,img:'steak'},
- {id:'g10',c:'grills',n:'شيش طاووق',p:420,kg:1,img:'chicken'},
- {id:'g11',c:'grills',n:'فرخة كناري',p:300,img:'chicken',u:'للفرخة'},
- {id:'s1',c:'sand',n:'رغيف كفتة',p:65,img:'sandwich'},
- {id:'s2',c:'sand',n:'رغيف طرب',p:85,img:'sandwich'},
- {id:'s3',c:'sand',n:'رغيف ستيك',p:115,img:'sandwich'},
- {id:'s4',c:'sand',n:'رغيف شيش طاووق',p:60,img:'sandwich'},
- {id:'s5',c:'sand',n:'رغيف سجق',p:70,img:'sandwich'},
- {id:'p1',c:'tagine',n:'طاجن بشاميل',p:60,img:'tagine'},
- {id:'p2',c:'tagine',n:'طاجن لحمة وخضار وأرز',p:250,img:'tagine'},
- {id:'h1',c:'haw',n:'حواوشي سادة',p:45,img:'hawawshi'},
- {id:'h2',c:'haw',n:'حواوشي جبنة',p:60,img:'hawawshi'},
+ {id:'g10',c:'grills',n:'شيش طاووق',p:420,kg:1,img:'tawook'},
+ {id:'g11',c:'grills',n:'فرخة كناري',p:300,img:'kanari',u:'للفرخة'},
+ S('s1','رغيف كفتة',65),S('s2','رغيف طرب',85),S('s3','رغيف ستيك',115),S('s4','رغيف شيش طاووق',60),S('s5','رغيف سجق',70),
+ {id:'p1',c:'tagine',n:'طاجن بشاميل',p:60,img:'tagine_b'},
+ {id:'p2',c:'tagine',n:'طاجن لحمة وخضار وأرز',p:250,img:'tagine_m'},
+ {id:'h1',c:'haw',n:'حواوشي سادة',p:45,img:'haw1'},
+ {id:'h2',c:'haw',n:'حواوشي جبنة',p:60,img:'haw2'},
  {id:'e1',c:'extra',n:'طحينة',p:5,img:'tahini'},
  {id:'e2',c:'extra',n:'سلطة',p:10,img:'salad'},
  {id:'e3',c:'extra',n:'جبنة',p:10,img:'cheese'},
@@ -242,6 +239,7 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 
 /* ===== رسم المنيو ===== */
 function pic(it){
+  if(!it.img)return '';
   return `<div class="pic"><img src="${imgSrc(it.img)}" alt="${esc(it.n)}" loading="lazy" onerror="this.replaceWith(document.createTextNode('${EMO[it.c]}'))"></div>`;
 }
 function card(it){
@@ -253,12 +251,13 @@ function card(it){
   }
   const price=it.kg?`<span class="price">${it.p}<small>جنيه / الكيلو</small></span>`:`<span class="price">${it.p}<small>جنيه${it.u?' '+it.u:''}</small></span>`;
   const list=it.l?`<ul>${it.l.map(x=>`<li>${x}</li>`).join('')}</ul>`:'';
-  return `<article class="item" data-name="${esc(it.n+' '+(it.d||''))}">${it.tag?`<span class="ribbon">${it.tag}</span>`:''}${pic(it)}
-  <div class="info"><h3>${esc(it.n)}</h3>${it.d?`<p>${esc(it.d)}</p>`:''}${list}
+  const ni=!it.img;
+  return `<article class="item${ni?' noimg':''}" data-name="${esc(it.n+' '+(it.d||''))}">${it.tag&&!ni?`<span class="ribbon">${it.tag}</span>`:''}${pic(it)}
+  <div class="info"><h3>${esc(it.n)}${it.tag&&ni?` <em class="tg">${it.tag}</em>`:''}</h3>${it.d?`<p>${esc(it.d)}</p>`:''}${list}
   <div class="pr">${price}${it.kg?'':act}</div>${it.kg?`<div style="margin-top:8px">${act}</div>`:''}</div></article>`;
 }
 function renderMenu(){
-  $('#menu').innerHTML=CATS.map(c=>`<section class="sec" id="${c.id}" data-cat="${c.id}"><h2>${c.e} ${c.t}</h2>${c.s?`<div class="sub">${c.s}</div>`:''}<div class="grid ${c.id==='trays'?'trays':''}">${ITEMS.filter(i=>i.c===c.id).map(card).join('')}</div></section>`).join('');
+  $('#menu').innerHTML=CATS.map(c=>`<section class="sec" id="${c.id}" data-cat="${c.id}"><h2>${c.e} ${c.t}</h2>${c.s?`<div class="sub">${c.s}</div>`:''}${c.b?`<img class="ban" src="${imgSrc(c.b)}" alt="${c.t}" loading="lazy" onerror="this.remove()">`:''}<div class="grid ${c.id==='trays'?'trays':''}">${ITEMS.filter(i=>i.c===c.id).map(card).join('')}</div></section>`).join('');
   $('#chips').innerHTML=CATS.map((c,i)=>`<button class="chip${i?'':' on'}" data-go="${c.id}">${c.e} ${c.t}</button>`).join('');
   ITEMS.filter(i=>!i.kg).forEach(refreshAct);
 }
@@ -351,7 +350,7 @@ $('#q').addEventListener('input',e=>{
 
 /* تمييز القسم الحالي */
 const io=new IntersectionObserver(es=>es.forEach(en=>{
-  if(en.isIntersecting){document.querySelectorAll('.chip').forEach(c=>{const on=c.dataset.go===en.target.id;c.classList.toggle('on',on);if(on)c.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'})})}
+  if(en.isIntersecting){document.querySelectorAll('.chip').forEach(c=>{const on=c.dataset.go===en.target.id;c.classList.toggle('on',on);if(on){const bx=$('#chips'),cr=c.getBoundingClientRect(),br=bx.getBoundingClientRect();bx.scrollLeft+=(cr.left+cr.width/2)-(br.left+br.width/2)}})}
 }),{rootMargin:'-140px 0px -65% 0px'});
 
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),1800)}
